@@ -2,13 +2,13 @@
  * サービスのUUIDです。
  * @type {string}
  */
-//const SERVICE_UUID = "49535343-FE7D-4AE5-8FA9-9FAFD205E455";
+const SERVICE_UUID = "49535343-FE7D-4AE5-8FA9-9FAFD205E455";
 
 /**
  * キャラクタリスティックのUUIDです。
  * @type {string}
  */
-//const CHARACTERISTIC_UUID = "49535343-8841-43F4-A8D4-ECBE34729BB3";
+const CHARACTERISTIC_UUID = "49535343-8841-43F4-A8D4-ECBE34729BB3";
 
 /**
  * BLE接続で取得したキャラクタリスティックです。
@@ -72,11 +72,10 @@ function connectBLE() {
 
       console.log("BLE接続が完了しました。");
 
-      // LEDを切り替えるボタンを表示
-      showLEDButton();
-
       // loading非表示
       loading.className = "hide";
+      // TRANSTER button表示
+      send-button.className = "show";
     })
     .catch(error => {
       console.log("Error : " + error);
@@ -84,6 +83,10 @@ function connectBLE() {
       // loading非表示
       loading.className = "hide";
     });
+}
+
+function transferData() {
+    printerCharacteristic.writeValue(new Uint8Array([0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x0a]));
 }
 
 window.addEventListener("load", init);
