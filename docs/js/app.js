@@ -3,13 +3,12 @@
  * @type {string}
  */
 //const SERVICE_UUID = "49535343-FE7D-4AE5-8FA9-9FAFD205E455";
-const SERVICE_UUID = "49535343-8841-43F4-A8D4-ECBE34729BB3";
 
 /**
  * キャラクタリスティックのUUIDです。
  * @type {string}
  */
-const CHARACTERISTIC_UUID = "49535343-8841-43F4-A8D4-ECBE34729BB3";
+//const CHARACTERISTIC_UUID = "49535343-8841-43F4-A8D4-ECBE34729BB3";
 
 /**
  * BLE接続で取得したキャラクタリスティックです。
@@ -44,13 +43,7 @@ function connectBLE() {
   loading.className = "show";
 
   navigator.bluetooth.requestDevice({
-    filters: [
-      {
-        services: [
-          SERVICE_UUID
-        ]
-      }
-    ]
+    acceptAllDevices: true
   })
     .then(device => {
       console.log("デバイスを選択しました。接続します。");
