@@ -45,7 +45,13 @@ function connectBLE() {
   loading.className = "show";
 
   navigator.bluetooth.requestDevice({
-    acceptAllDevices: true
+    filters: [
+      {
+        services: [
+          SERVICE_UUID
+        ]
+      }
+    ]
   })
     .then(device => {
       console.log("デバイスを選択しました。接続します。");
