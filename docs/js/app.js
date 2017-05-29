@@ -41,25 +41,25 @@ function init() {
  * Web Bluetooth APIでBLEデバイスに接続します。
  */
 function connectBLE2() {
-  console.log('Requesting any Bluetooth Device...');
+  console.log("Requesting any Bluetooth Device...");
   navigator.bluetooth.requestDevice({
    // filters: [...] <- Prefer filters to save energy & show relevant devices.
       acceptAllDevices: true,
       optionalServices: [SERVICE_UUID]})
   .then(device => {
-    console.log('Connecting to GATT Server...');
+    console.log("Connecting to GATT Server...");
     return device.gatt.connect();
   })
   .then(server => {
-    console.log('Getting Service...');
+    console.log("Getting Service...");
     return server.getPrimaryService(SERVICE_UUID);
   })
   .then(service => {
-    console.log('Getting Characteristic...');
+    console.log("Getting Characteristic...");
     return service.getCharacteristic(CHARACTERISTIC_UUID);
   })
   .then(characteristic => {
-    console.log('Getting Descriptor...');
+    console.log("Getting Descriptor...");
     return characteristic.getDescriptor('gatt.characteristic_user_description');
   })
   /*
@@ -76,8 +76,7 @@ function connectBLE2() {
   })
   */
   .catch(error => {
-    document.querySelector('#writeButton').disabled = true;
-    log('Argh! ' + error);
+    console.log("Argh! " + error);
   });
 }
 
