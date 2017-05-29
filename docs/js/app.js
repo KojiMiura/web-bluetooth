@@ -32,7 +32,7 @@ let loading;
  */
 function init() {
   connectButton = document.querySelector("#ble-connect-button");
-  connectButton.addEventListener("click", connectBLE);
+  connectButton.addEventListener("click", connectBLE2);
 
   loading = document.querySelector("#loading");
 }
@@ -40,6 +40,47 @@ function init() {
 /**
  * Web Bluetooth APIでBLEデバイスに接続します。
  */
+function connectBLE2() {
+  log('Requesting any Bluetooth Device...');
+  navigator.bluetooth.requestDevice({
+   // filters: [...] <- Prefer filters to save energy & show relevant devices.
+      acceptAllDevices: true,
+      optionalServices: [SERVICE_UUID]})
+  .then(device => {
+    log('Connecting to GATT Server...');
+    return device.gatt.connect();
+  })
+  .then(server => {
+    log('Getting Service...');
+    return server.getPrimaryService(SERVICE_UUID);
+  })
+  .then(service => {
+    log('Getting Characteristic...');
+    return service.getCharacteristic(CHARACTERISTIC_UUID);
+  })
+  .then(characteristic => {
+    log('Getting Descriptor...');
+    return characteristic.getDescriptor('gatt.characteristic_user_description');
+  })
+  /*
+  .then(descriptor => {
+    document.querySelector('#writeButton').disabled =
+        !descriptor.characteristic.properties.write;
+    myDescriptor = descriptor;
+    log('Reading Descriptor...');
+    return descriptor.readValue();
+  })
+  .then(value => {
+    let decoder = new TextDecoder('utf-8');
+    log('> Characteristic User Description: ' + decoder.decode(value));
+  })
+  */
+  .catch(error => {
+    document.querySelector('#writeButton').disabled = true;
+    log('Argh! ' + error);
+  });
+}
+
 function connectBLE() {
   // loading表示
   loading.className = "show";
