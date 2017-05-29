@@ -2,13 +2,15 @@
  * サービスのUUIDです。
  * @type {string}
  */
-const SERVICE_UUID = "49535343-FE7D-4AE5-8FA9-9FAFD205E455";
+//const SERVICE_UUID = "49535343-FE7D-4AE5-8FA9-9FAFD205E455";
+const SERVICE_UUID = "49535343-fe7d-4ae5-8fa9-9fafd205e455";
 
 /**
  * キャラクタリスティックのUUIDです。
  * @type {string}
  */
-const CHARACTERISTIC_UUID = "49535343-8841-43F4-A8D4-ECBE34729BB3";
+//const CHARACTERISTIC_UUID = "49535343-8841-43F4-A8D4-ECBE34729BB3";
+const CHARACTERISTIC_UUID = "49535343-8841-43f4-a8d4-ecbe34729bb3";
 
 /**
  * BLE接続で取得したキャラクタリスティックです。
@@ -75,7 +77,7 @@ function connectBLE() {
       // loading非表示
       loading.className = "hide";
       // TRANSTER button表示
-      send-button.className = "show";
+      //send-button.className = "show";
     })
     .catch(error => {
       console.log("Error : " + error);
